@@ -74,64 +74,74 @@ const LocationPage = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="location-page py-20">
-      <div className="location-list">
-      <div className="flex w-full">
-        <SearchButton handleSearch={handleSearch} />
-      </div>
-        
-        <div className="location-list grid grid-cols-4 gap-4">
-          {filteredLocations.length > 0 ? (
-            filteredLocations.map(location => (
-              <div key={location.id} className="flex flex-col justify-between location-card border border-gray-300 rounded p-4 mb-2">
-                <h2 className="text-xl font-bold">{location.name}</h2>
-                <p>Type: {location.type}</p>
-                <p>Dimension: {location.dimension}</p>
-                <p>Created: {new Date(location.created).toLocaleDateString()}</p>
-                <button
-                  onClick={() => handleShowResidents(location.residents)}
-                  className="bg-slate-700 w-full text-white py-2 px-4 rounded-lg"
-                >
-                  Show characters location
-                </button>
-              </div>
-            ))
-          ) : (
-            <div>"{setSearchQuery}" No results found</div>
-          )}
-        </div>
-      </div>
-      {isDrawerOpen && (
-        <div className="drawer fixed right-0 top-[60px] bg-white drop-shadow-2xl flex h-full">
-          <div className="drawer-content bg-white h-full p-4 overflow-y-auto">
-            <button
-              onClick={handleDrawerClose}
-              className="close-button bg-red-500 text-white py-1 px-2 rounded mb-4"
-            >
-              Close
-            </button>
-            {residentsLoading && <div>Loading residents...</div>}
-            {residentsError && <div>Error loading residents: {residentsError.message}</div>}
-            {residents.length > 0 ? (
-              residents.map(resident => (
-                <div
-                  key={resident.id}
-                  className="resident-card border border-gray-300 rounded p-4 mb-2 flex cursor-pointer"
-                  onClick={() => handleCharacterClick(resident)}
-                >
-                  <img src={resident.image} alt={resident.name} className="w-16 h-16 mr-4" />
-                  <div>
-                    <h3 className="text-lg font-bold">{resident.name}</h3>
-                    <p>ID: {resident.id}</p>
-                  </div>
+    <div className="container max-w-[1230px] mx-auto px-4">
+
+
+      <div className="location-page py-20">
+
+        <div className="location-list">
+          <div className="flex w-full">
+            <input
+              type="search"
+              placeholder="Search by name"
+              value={searchQuery}
+              onChange={handleSearch}
+              className="search-input border w-full border-gray-300 rounded p-2 mb-4"
+            />
+          </div>
+          <div className="location-list grid grid-cols-4 gap-4">
+            {filteredLocations.length > 0 ? (
+              filteredLocations.map(location => (
+                <div key={location.id} className="flex flex-col gap-3 justify-between location-card border border-gray-300 rounded p-4 mb-2">
+                  <h2 className="text-xl font-bold">{location.name}</h2>
+                  <p>Type: {location.type}</p>
+                  <p>Dimension: {location.dimension}</p>
+                  <p>Created: {new Date(location.created).toLocaleDateString()}</p>
+                  <button
+                    onClick={() => handleShowResidents(location.residents)}
+                    className="bg-slate-700 w-full text-white py-2 px-4 rounded-lg"
+                  >
+                    Show characters location
+                  </button>
                 </div>
               ))
             ) : (
-              !residentsLoading && <div>No residents to show</div>
+              <div>"{setSearchQuery}" No results found</div>
             )}
           </div>
         </div>
-      )}
+        {isDrawerOpen && (
+          <div className="drawer fixed right-0 top-[60px] bg-white drop-shadow-2xl flex h-full">
+            <div className="drawer-content bg-white h-full p-4 overflow-y-auto">
+              <button
+                onClick={handleDrawerClose}
+                className="close-button bg-red-500 text-white py-1 px-2 rounded mb-4"
+              >
+                Close
+              </button>
+              {residentsLoading && <div>Loading residents...</div>}
+              {residentsError && <div>Error loading residents: {residentsError.message}</div>}
+              {residents.length > 0 ? (
+                residents.map(resident => (
+                  <div
+                    key={resident.id}
+                    className="resident-card border border-gray-300 rounded p-4 mb-2 flex cursor-pointer"
+                    onClick={() => handleCharacterClick(resident)}
+                  >
+                    <img src={resident.image} alt={resident.name} className="w-16 h-16 mr-4" />
+                    <div>
+                      <h3 className="text-lg font-bold">{resident.name}</h3>
+                      <p>ID: {resident.id}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                !residentsLoading && <div>No residents to show</div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

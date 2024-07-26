@@ -27,6 +27,7 @@ export const MyProvider = ({ children }) => {
     try {
       const initialResponse = await axios.get('https://rickandmortyapi.com/api/character');
       const totalPages = initialResponse.data.info.pages;
+      // console.log('first',totalPages)
       let allCharacters = [...initialResponse.data.results];
 
       for (let page = 2; page <= totalPages; page++) {

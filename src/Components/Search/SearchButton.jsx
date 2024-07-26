@@ -17,7 +17,7 @@ const SearchButton = ({ handleSearch }) => {
         className="w-full px-4 py-2 border rounded-lg"
         placeholder="Search..."
       />
-       
+
     </div>
   );
 };

@@ -3,19 +3,19 @@ import { Link } from 'react-router-dom';
 
 const Card = ({ article, index, articles }) => {
   return (
-    <div className="relative flex flex-col  py-20 justify-between mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
+    <div className="relative flex flex-col  pt-20 justify-between mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
       <div className="relative h-56 mx-4 -mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
         <img src={article.image} alt="card-image" className="w-full h-full object-contain" />
       </div>
       <div className="p-6">
-        <div className="grid grid-cols-3 items-start">
-          <div className='col-span-2'>
+        <div className="flex justify-between">
+          <div className=''>
             <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
               {article.name}
             </h5>
           </div>
           <div className='text-right'>
-            <h6>{article.status} - {article.species}</h6>
+            <h6>{article.status}-{article.species}</h6>
           </div>
         </div>
         <div className="grid grid-cols-2 mt-4">
