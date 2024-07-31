@@ -9,15 +9,15 @@ const SearchButton = ({ handleSearch }) => {
   };
 
   return (
-    <div className="flex items-center w-full">
+    <div className="flex items-center w-1/2  ">
       <input
         type="search"
         value={query}
+        maxLength={25}
         onChange={handleInputChange}
-        className="w-full px-4 py-2 border rounded-lg"
+        className="w-full px-4 py-2 text-[#f0ffef] bg-[#ffffff14] border rounded-lg"
         placeholder="Search..."
       />
-
     </div>
   );
 };

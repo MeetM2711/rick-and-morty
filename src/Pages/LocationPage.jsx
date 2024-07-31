@@ -75,10 +75,7 @@ const LocationPage = () => {
 
   return (
     <div className="container max-w-[1230px] mx-auto px-4">
-
-
-      <div className="location-page py-20">
-
+      <div className="location-page  py-20">
         <div className="location-list">
           <div className="flex w-full">
             <input
@@ -86,20 +83,20 @@ const LocationPage = () => {
               placeholder="Search by name"
               value={searchQuery}
               onChange={handleSearch}
-              className="search-input border w-full border-gray-300 rounded p-2 mb-4"
+              className="search-input border w-full bg-[#ffffff14] border-gray-300 rounded p-2 mb-4"
             />
           </div>
           <div className="location-list grid grid-cols-4 gap-4">
             {filteredLocations.length > 0 ? (
               filteredLocations.map(location => (
-                <div key={location.id} className="flex flex-col gap-3 justify-between location-card border border-gray-300 rounded p-4 mb-2">
-                  <h2 className="text-xl font-bold">{location.name}</h2>
-                  <p>Type: {location.type}</p>
-                  <p>Dimension: {location.dimension}</p>
-                  <p>Created: {new Date(location.created).toLocaleDateString()}</p>
+                <div key={location.id} className="flex flex-col gap-3 justify-between location-card border bg-[#166678] border-gray-300 rounded p-4 mb-2">
+                  <h2 className="text-xl text-[#93f373] font-bold">{location.name}</h2>
+                  <p className='text-[#79e7ff] mt-2 font-semibold mr-2'>Type: <span className='text-[#f0ffef]'> {location.type} </span></p>
+                  <p className='text-[#79e7ff] mt-2 font-semibold mr-2'>Dimension: <span className='text-[#f0ffef]'> {location.dimension} </span></p>
+                  <p className='text-[#79e7ff] mt-2 font-semibold mr-2'>Created: <span className='text-[#f0ffef]'> {new Date(location.created).toLocaleDateString()} </span></p>
                   <button
                     onClick={() => handleShowResidents(location.residents)}
-                    className="bg-slate-700 w-full text-white py-2 px-4 rounded-lg"
+                    className="btn "
                   >
                     Show characters location
                   </button>
@@ -111,11 +108,11 @@ const LocationPage = () => {
           </div>
         </div>
         {isDrawerOpen && (
-          <div className="drawer fixed right-0 top-[60px] bg-white drop-shadow-2xl flex h-full">
-            <div className="drawer-content bg-white h-full p-4 overflow-y-auto">
+          <div className="drawer fixed right-0 top-[60px]   drop-shadow-2xl flex h-full">
+            <div className="drawer-content bg-[#0d1f2dff] h-full p-4 pt-7 overflow-y-auto">
               <button
                 onClick={handleDrawerClose}
-                className="close-button bg-red-500 text-white py-1 px-2 rounded mb-4"
+                className="close-button bg-[#166678] text-white py-1 px-2 rounded mb-4"
               >
                 Close
               </button>
@@ -125,11 +122,11 @@ const LocationPage = () => {
                 residents.map(resident => (
                   <div
                     key={resident.id}
-                    className="resident-card border border-gray-300 rounded p-4 mb-2 flex cursor-pointer"
+                    className="items-center resident-card border bg-[#ffffff14] border-gray-300 text-[#f0ffef]  cursor-pointer rounded p-4 mb-2 flex"
                     onClick={() => handleCharacterClick(resident)}
                   >
-                    <img src={resident.image} alt={resident.name} className="w-16 h-16 mr-4" />
-                    <div>
+                    <img src={resident.image} alt={resident.name} className="w-16 rounded-full h-16 object-cover mb-2" />
+                    <div className=' ml-5'>
                       <h3 className="text-lg font-bold">{resident.name}</h3>
                       <p>ID: {resident.id}</p>
                     </div>

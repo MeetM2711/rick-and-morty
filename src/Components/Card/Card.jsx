@@ -1,44 +1,87 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Card = ({ article, index, articles }) => {
+  const handleCardClick = () => {
+    const characterData = {
+      id: article.id,
+      name: article.name,
+      status: article.status,
+      species: article.species,
+      gender: article.gender,
+      origin: article.origin.name,
+      location: article.location.name,
+      image: article.image,
+    };
+
+    saveToRecent(characterData);
+  };
+
+  const saveToRecent = (character) => {
+    let recentData = JSON.parse(sessionStorage.getItem("recentData")) || [];
+
+    // Remove the character if it already exists
+    recentData = recentData.filter((item) => item.id !== character.id);
+
+    // Add the new character data to the beginning of the array
+    recentData.unshift(character);
+
+    // Keep only the last 5 records
+    if (recentData.length > 5) {
+      recentData.pop();
+    }
+
+    sessionStorage.setItem("recentData", JSON.stringify(recentData));
+  };
+
   return (
-    <div className="relative flex flex-col  pt-20 justify-between mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
-      <div className="relative h-56 mx-4 -mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-        <img src={article.image} alt="card-image" className="w-full h-full object-contain" />
-      </div>
-      <div className="p-6">
-        <div className="flex justify-between">
-          <div className=''>
-            <h5 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-              {article.name}
-            </h5>
+    <div class="card mt-2 bg-[#166678]" onClick={handleCardClick}>
+      <div class="heading">
+        <div className="image-con flex items-center gap-3">
+          <div>
+          <img
+            src={article.image}
+            alt="card-image"
+            className="animate-pulse transition-transform"
+          />
           </div>
-          <div className='text-right'>
-            <h6>{article.status}-{article.species}</h6>
+          <div className="flex flex-col justify-center items-start">
+            <div>
+              <h2 className="text-xl font-semibold text-[#93f373]">
+                {article.name}
+              </h2>
+            </div>
+            <div className="mt-2">
+              <h6>
+                {article.status} - {article.species}
+              </h6>
+            </div>
+        <div className="pt-2"> 
+          <div className="flex flex-col mt-1">
+            <div className="flex gap-2">
+              <p className="block  text-[#79e7ff] font-semibold ">
+              Location: 
+              </p>
+              {article.location.name}
+            </div>
+            <div className="mt-2 flex gap-2">
+              <p className="block  text-[#79e7ff] font-semibold ">
+              Origin: 
+              </p>
+              {article.origin.name}
+            </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 mt-4">
-          <div className='text-left'>
-            <p className="block font-sans font-semibold text-base antialiased leading-relaxed text-inherit">
-              Last known location:
-            </p>
-            {article.location.name}
-          </div>
-          <div className='text-right'>
-            <p className="block font-sans text-base antialiased font-semibold leading-relaxed text-inherit">
-              First seen in:
-            </p>
-            {article.origin.name}
           </div>
         </div>
-      </div>
-      <div className="p-6 pt-0 w-full">
-        <Link to={`/characterDetails/${index}`} state={{ article, articles, index }}>
-          <button className="bg-slate-700 w-full text-white py-2 px-4 rounded-lg">
-            View Profile
-          </button>
-        </Link>
+        <div className="p-2 my-4 pb-3 pt-0  w-full">
+          <Link
+            to={`/characterDetails/${article.id}`}
+            state={{ article, charactersList: articles }}
+          >
+            <button class="btn w-full ">View Profile</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

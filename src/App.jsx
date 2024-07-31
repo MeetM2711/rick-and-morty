@@ -12,19 +12,21 @@ import Header from './Components/Header/Header';
 
 function App() {
   return (
-    <MyProvider>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/characterDetails/:id" element={<CharacterDetails />} />
-          <Route path="/location" element={<LocationPage />} />
-          <Route path="/episodes" element={<EpisodesPage />} />
-          <Route path="/contactus" element={<ContactUsPage />} />
-          <Route path="/aboutus" element={<AboutUsPage />} />
-        </Routes>
-      </BrowserRouter>
-    </MyProvider>
+    <div className='bg-[#0d1f2dff]'>
+      <MyProvider>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/characterDetails/:id" element={<CharacterDetails />} />
+            <Route path="/location" element={<LocationPage />} />
+            <Route path="/episodes" element={<EpisodesPage />} />
+            <Route path="/contactus" element={<ContactUsPage />} />
+            <Route path="/aboutus" element={<AboutUsPage />} />
+          </Routes>
+        </BrowserRouter>
+      </MyProvider>
+    </div>
   );
 }
 

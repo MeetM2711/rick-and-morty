@@ -64,7 +64,7 @@ const EpisodePage = () => {
               placeholder="Search by name..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="p-2 border w-full  border-gray-300 rounded"
+              className="p-2 border w-full bg-[#ffffff14] border-gray-300 rounded"
             />
           </div>
         </div>
@@ -72,13 +72,13 @@ const EpisodePage = () => {
         <div className="episodes-list grid grid-cols-4 gap-4">
           {filteredEpisodes.length > 0 ? (
             filteredEpisodes.map((episode) => (
-              <div key={episode.id} className="episode-card flex flex-col gap-3 justify-between p-4 border border-gray-300 rounded mb-2">
-                <h2 className="text-xl font-bold">{episode.name}</h2>
-                <p className="text-sm text-gray-600">{episode.air_date}</p>
-                <p className="text-sm text-gray-600">Episode: {episode.episode}</p>
+              <div key={episode.id} className="episode-card flex flex-col gap-3 justify-between p-4 border bg-[#166678] border-gray-300 rounded mb-2">
+                <h2 className="text-xl text-[#93f373] font-bold">{episode.name}</h2>
+                <p className="text-[#79e7ff] mt-2 font-semibold mr-2">Date:<span className='text-[#f0ffef]'> {episode.air_date} </span></p>
+                <p className="text-[#79e7ff] mt-2 font-semibold mr-2">Episode:<span className='text-[#f0ffef]'> {episode.episode} </span></p>
                 <button
                   onClick={() => fetchCharacters(episode.id)}
-                  className="bg-slate-700 w-full text-white py-2 px-4 rounded-lg"
+                  className="btn"
                 >
                   Show characters location
                 </button>
@@ -91,15 +91,15 @@ const EpisodePage = () => {
 
 
         {drawerOpen && (
-          <div className="fixed top-[60px] right-0 w-1/3 h-full bg-white shadow-lg p-4 overflow-y-auto">
-            <button onClick={() => setDrawerOpen(false)} className="mb-4 p-2 bg-gray-200 rounded">Close</button>
-            <h2 className="text-xl font-bold mb-4">Characters</h2>
+          <div className="fixed top-[60px] right-0 w-1/3 h-full bg-[#0d1f2dff] shadow-lg p-4  pt-7 overflow-y-auto">
+            <button onClick={() => setDrawerOpen(false)} className="mb-4  p-2 bg-[#166678]  rounded">Close</button>
+            <h2 className="text-xl text-[#93f373] font-bold mb-4">Characters</h2>
             <div className="characters-list">
               {characters.length > 0 ? (
                 characters.map(character => (
-                  <div key={character.id} className="character-card flex items-center gap-3 p-2 border border-gray-300 rounded mb-2 cursor-pointer" onClick={() => handleCharacterClick(character.id)}>
+                  <div key={character.id} className="character-card flex items-center gap-3 p-2 border bg-[#ffffff14] border-gray-300 text-[#f0ffef] rounded mb-2 cursor-pointer" onClick={() => handleCharacterClick(character.id)}>
                     <img src={character.image} alt={character.name} className="w-16 rounded-full h-16 object-cover mb-2" />
-                    <h3 className="text-lg font-semibold">{character.id}-{character.name}</h3>
+                    <h3 className="text-lg  font-semibold">{character.id}-{character.name}</h3>
                   </div>
                 ))
               ) : (
