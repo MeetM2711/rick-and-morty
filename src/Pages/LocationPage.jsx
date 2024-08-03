@@ -144,3 +144,28 @@ const LocationPage = () => {
 };
 
 export default LocationPage;
+
+
+if (x === 0) return 0;
+
+let left = 1;
+let right = x;
+let result = 0;
+
+while (left <= right) {
+    const mid = Math.floor((left + right) / 2);
+    const squared = mid * mid;
+
+    if (squared === x) {
+        return mid;
+    } else if (squared < x) {
+        result = mid;  
+        left = mid + 1;
+    } else {
+        right = mid - 1;
+    }
+}
+
+return result;
+
+const sqrtResult = mySqrt(x);
